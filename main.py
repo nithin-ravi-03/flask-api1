@@ -18,11 +18,16 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Load trained model
 MODEL_PATH = "model/mobilenet_v2_model.keras"
-model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+try:
+    model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+except Exception as e:
+    print("Model loading failed:", e)
 
-# Load class labels
-with open("model/dataset-details.json", "r") as f:
-    class_indices = json.load(f)
+try:
+    with open("model/dataset-details.json", "r") as f:
+        class_indices = json.load(f)
+except Exception as e:
+    print("Class labels loading failed:", e)
 
 # Ensure keys are strings for correct mapping
 class_labels = {str(v): k for k, v in class_indices.items()}

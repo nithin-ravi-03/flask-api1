@@ -1,7 +1,9 @@
 services:
   - type: web
-    name: flask-image-api
+    name: flask-api1-mobilenetv2
     env: python
-    buildCommand: ""
-    startCommand: python app.py
-    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: PORT
+        value: 5000
